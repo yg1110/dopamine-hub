@@ -1,5 +1,7 @@
+import VideoList from './components/VideoList';
+
 const Home: React.FC = () => {
-  return <div>home</div>;
+  return <VideoList />;
 };
 
 export default Home;
