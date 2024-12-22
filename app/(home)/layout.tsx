@@ -1,8 +1,8 @@
 import './globals.css';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
-import Provider from './Provider';
+import Provider from '../Provider';
 
 export const metadata: Metadata = {
   title: 'dopamine-hub',
@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 
 type Props = {
   children: React.ReactNode;
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: Props) {
