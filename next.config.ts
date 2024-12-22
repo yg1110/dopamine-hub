@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: '/chzzk/:path*',
+        destination: 'https://api.chzzk.naver.com/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

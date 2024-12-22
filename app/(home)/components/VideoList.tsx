@@ -1,11 +1,29 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import VerticalSwiper from '../../../components/VerticalSwiper';
+import { ClipData } from '@/api/chzzk/get-recommended-clips.ts';
+import VerticalSwiper from '@/components/VerticalSwiper';
+
+import { useRecommendedClips } from '../hooks/useRecommendedClips';
 
 const VideoList = () => {
-  return <VerticalSwiper slides={['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']} />;
+  const [currentParams, setCurrentParams] = useState<string>('');
+  const [nextParams, setNextParams] = useState<string>('');
+  const [clips, setClips] = useState<ClipData[]>([]);
+  const { data } = useRecommendedClips(currentParams);
+
+  useEffect(() => {
+    if (!data) return;
+    setNextParams(data.page.next.next);
+    setClips([...clips, ...data.data]);
+  }, [data]);
+
+  const onChangeNextParams = () => {
+    setCurrentParams(nextParams);
+  };
+
+  return <VerticalSwiper clips={clips} onChangeNextParams={onChangeNextParams} />;
 };
 
 export default VideoList;
